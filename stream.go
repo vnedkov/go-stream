@@ -20,7 +20,7 @@ type Streamer[T any, U any, V any] interface {
 	// Filter removes all the elements for which the given function returns false
 	Filter(f func(T) bool) Streamer[T, U, V]
 	// Join combines two streams in one
-	Join(t Streamer[T, U, V]) Streamer[T, U, V]
+	Join(t ...Streamer[T, U, V]) Streamer[T, U, V]
 	// Map uses the given function to transform all elements to a new type
 	Map(f func(T) U) Streamer[U, T, V]
 	// Reduce reduces all elements to a new type given a transformation function

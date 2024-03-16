@@ -12,8 +12,10 @@ func (s *Stream[T, U, V]) Collect() []T {
 }
 
 // Join appends the given slice to the stream
-func (s *Stream[T, U, V]) Join(t Streamer[T, U, V]) Streamer[T, U, V] {
-	s.dt = append(s.dt, t.Collect()...)
+func (s *Stream[T, U, V]) Join(t ...Streamer[T, U, V]) Streamer[T, U, V] {
+	for _, v := range t {
+		s.dt = append(s.dt, v.Collect()...)
+	}
 	return s
 }
 

@@ -15,11 +15,12 @@ func TestOf(t *testing.T) {
 func TestJoin(t *testing.T) {
 	stream1 := Of[int, any, any]([]int{1, 2, 3})
 	stream2 := Of[int, any, any]([]int{4, 5, 6})
-	assert.Equal(t, stream1.Join(stream2).Collect(), []int{1, 2, 3, 4, 5, 6})
+	stream3 := Of[int, any, any]([]int{7, 8})
+	assert.Equal(t, stream1.Join(stream2, stream3).Collect(), []int{1, 2, 3, 4, 5, 6, 7, 8})
 
-	stream3 := Of[string, any, any]([]string{"foo", "bar"})
-	stream4 := Of[string, any, any]([]string{"baz", "qux"})
-	assert.Equal(t, stream3.Join(stream4).Collect(), []string{"foo", "bar", "baz", "qux"})
+	stream4 := Of[string, any, any]([]string{"foo", "bar"})
+	stream5 := Of[string, any, any]([]string{"baz", "qux"})
+	assert.Equal(t, stream4.Join(stream5).Collect(), []string{"foo", "bar", "baz", "qux"})
 }
 
 func TestMap(t *testing.T) {
@@ -54,7 +55,7 @@ func TestReduce(t *testing.T) {
 
 func TestMapReduce(t *testing.T) {
 	letterCount := Of[string, int, int]([]string{"foo", "bar"}).
-		Map(func(s string) int {return len(s)}).
-		Reduce(func(i1, i2 int) int {return i1 + i2}, 0)
+		Map(func(s string) int { return len(s) }).
+		Reduce(func(i1, i2 int) int { return i1 + i2 }, 0)
 	assert.Equal(t, 6, letterCount)
 }
