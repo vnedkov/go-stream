@@ -4,7 +4,7 @@ This package provides functionality similar to Java Stream API in Go
 
 ## Receiver type
 
-Because Go does not support type parameters in methods yet [issue 49085](https://github.com/golang/go/issues/49085), all type parameters must be declared in the receiver type. For now two type parameters need to be defined:
+Because Go does not support type parameters in methods yet [issue 49085](https://github.com/golang/go/issues/49085), all type parameters must be declared in the receiver type. For now three type parameters need to be defined:
 * The type of the stream element
 * The type of the result of `Map` method. If you are not planning to transform one type into another, the type parameter can be `any`
 * The result type of `Reduce` method. If Reduce is not used, the type parameter can be `any`
